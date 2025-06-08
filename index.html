@@ -44,16 +44,31 @@
 
         .star {
             position: absolute;
-            width: 2px;
-            height: 2px;
+            width: 4px;
+            height: 4px;
             background-color: white;
             border-radius: 50%;
-            animation: twinkle 2s infinite ease-in-out;
+            animation: twinkle 2s infinite ease-in-out, spin 4s linear infinite;
+            opacity: 0.8;
+            transform-origin: center;
+            will-change: transform, opacity;
+        }
+
+        .diamond {
+            width: 5px;
+            height: 5px;
+            border-radius: 0;
+            transform: rotate(45deg);
         }
 
         @keyframes twinkle {
             0%, 100% { opacity: 0.2; transform: scale(1); }
             50% { opacity: 1; transform: scale(1.4); }
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg) scale(1); }
+            100% { transform: rotate(360deg) scale(1); }
         }
 
         .profile-pic {
@@ -130,7 +145,6 @@
     Your browser does not support the video tag.
 </video>
 
-
 <!-- Name + Picture -->
 <div class="flex flex-col sm:flex-row items-center space-y-4 sm:space-y-0 sm:space-x-8 mb-6 z-10">
     <img src="media/fiona.jpg" alt="Fiona's Profile Picture" class="profile-pic" />
@@ -157,14 +171,21 @@
 
     for (let i = 0; i < numberOfStars; i++) {
         const star = document.createElement('div');
+        const isDiamond = Math.random() > 0.5;
+
         star.classList.add('star');
+        if (isDiamond) {
+            star.classList.add('diamond');
+        }
+
         star.style.top = `${Math.random() * 100}vh`;
         star.style.left = `${Math.random() * 100}vw`;
-        star.style.animationDuration = `${1.5 + Math.random() * 2}s`;
-        star.style.opacity = Math.random();
+        star.style.animationDuration = `${1.5 + Math.random() * 2}s, ${4 + Math.random() * 4}s`;
+        star.style.opacity = Math.random().toFixed(2);
         starContainer.appendChild(star);
     }
 </script>
 
 </body>
 </html>
+

@@ -1,139 +1,157 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8" />
-    <title>Fiona's Website</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="icon" type="image/png" href="favicon.png" />
-    <script src="https://cdn.tailwindcss.com"></script>
-    <style>
-        html, body {
-            height: 100%;
-            margin: 0;
-            padding: 0;
-            font-family: 'Arial', sans-serif;
-            color: white;
-            overflow: hidden;
-            background: radial-gradient(
-                    ellipse at bottom,
-                    #4c1d95 30%,
-                    #1e1b4b 55%,
-                    #0f001a 100%
-            );
-        }
+<meta charset="UTF-8" />
+<title>Fiona's Website</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<link rel="icon" type="image/png" href="favicon.png" />
+<script src="https://cdn.tailwindcss.com"></script>
+<style>
+  html, body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    font-family: 'Arial', sans-serif;
+    color: white;
+    overflow: hidden;
+    background: radial-gradient(
+      ellipse at bottom,
+      #4c1d95 30%,
+      #1e1b4b 55%,
+      #0f001a 100%
+    );
+  }
 
-        body {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            text-align: center;
-            position: relative;
-            z-index: 1;
-        }
+  body {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    position: relative;
+    z-index: 1;
+  }
 
-        #star-container {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            pointer-events: none;
-            z-index: 0;
-        }
+  #star-container {
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 0;
+  }
 
-        .star {
-            position: absolute;
-            width: 4px;
-            height: 4px;
-            background-color: white;
-            border-radius: 50%;
-            animation: twinkle 2s infinite ease-in-out, spin 4s linear infinite;
-            opacity: 0.8;
-            transform-origin: center;
-            will-change: transform, opacity;
-        }
+  /* Round stars */
+  .star {
+    position: absolute;
+    width: 8px;
+    height: 8px;
+    background: white;
+    border-radius: 50%;
+    filter: drop-shadow(0 0 6px #fff);
+    animation: twinkle 3s infinite ease-in-out, spin 6s linear infinite;
+    opacity: 0.7;
+  }
 
-        .diamond {
-            width: 5px;
-            height: 5px;
-            border-radius: 0;
-            transform: rotate(45deg);
-        }
+  /* Diamond stars */
+  .diamond {
+    position: absolute;
+    width: 8px;
+    height: 8px;
+    background: white;
+    filter: drop-shadow(0 0 6px #fff);
+    transform-origin: center;
+    animation: twinkle 3s infinite ease-in-out, spin 4s linear infinite;
+    opacity: 0.7;
+    transform: rotate(45deg);
+  }
 
-        @keyframes twinkle {
-            0%, 100% { opacity: 0.2; transform: scale(1); }
-            50% { opacity: 1; transform: scale(1.4); }
-        }
+  @keyframes twinkle {
+    0%, 100% {
+      opacity: 0.3;
+      transform: scale(1);
+      filter: drop-shadow(0 0 6px #fff);
+    }
+    50% {
+      opacity: 1;
+      transform: scale(1.5);
+      filter: drop-shadow(0 0 15px #fff);
+    }
+  }
 
-        @keyframes spin {
-            0% { transform: rotate(0deg) scale(1); }
-            100% { transform: rotate(360deg) scale(1); }
-        }
+  @keyframes spin {
+    0% {
+      transform: rotate(0deg);
+    }
+    100% {
+      transform: rotate(360deg);
+    }
+  }
 
-        .profile-pic {
-            width: 170px;
-            height: 170px;
-            object-fit: cover;
-            border-radius: 50%;
-            border: 5px solid #d946ef;
-            box-shadow: 0 0 20px rgba(236, 72, 153, 0.6);
-            transition: transform 0.3s ease-in-out;
-        }
+  .profile-pic {
+    width: 170px;
+    height: 170px;
+    object-fit: cover;
+    border-radius: 50%;
+    border: 5px solid #d946ef;
+    box-shadow: 0 0 20px rgba(236, 72, 153, 0.6);
+    transition: transform 0.3s ease-in-out;
+  }
 
-        .profile-pic:hover {
-            transform: scale(1.05);
-        }
+  .profile-pic:hover {
+    transform: scale(1.05);
+  }
 
-        .hero-name {
-            font-size: 4.5rem;
-            font-weight: 900;
-            background: linear-gradient(to right, #d946ef, #a78bfa, #ec4899);
-            background-clip: text;
-            -webkit-background-clip: text;
-            color: transparent;
-            -webkit-text-fill-color: transparent;
-            text-shadow: 0 0 15px rgba(236, 72, 153, 0.5);
-        }
+  .hero-name {
+    font-size: 4.5rem;
+    font-weight: 900;
+    background: linear-gradient(to right, #d946ef, #a78bfa, #ec4899);
+    background-clip: text;
+    -webkit-background-clip: text;
+    color: transparent;
+    -webkit-text-fill-color: transparent;
+    text-shadow: 0 0 15px rgba(236, 72, 153, 0.5);
+  }
 
-        .button-link {
-            padding: 16px 80px;
-            font-size: 20px;
-            border-radius: 9999px;
-            font-weight: bold;
-            transition: background-color 0.3s ease;
-            background-color: #8b5cf6;
-            text-align: center;
-            color: white;
-            box-shadow: 0 0 10px rgba(139, 92, 246, 0.5);
-        }
+  .button-link {
+    padding: 16px 80px;
+    font-size: 20px;
+    border-radius: 9999px;
+    font-weight: bold;
+    transition: background-color 0.3s ease;
+    background-color: #8b5cf6;
+    text-align: center;
+    color: white;
+    box-shadow: 0 0 10px rgba(139, 92, 246, 0.5);
+  }
 
-        .button-link:hover {
-            background-color: #7c3aed;
-        }
+  .button-link:hover {
+    background-color: #7c3aed;
+  }
 
-        @media (max-width: 640px) {
-            .hero-name {
-                font-size: 2.8rem;
-            }
+  @media (max-width: 640px) {
+    .hero-name {
+      font-size: 2.8rem;
+    }
 
-            .button-link {
-                padding: 12px 24px;
-                font-size: 16px;
-            }
+    .button-link {
+      padding: 12px 24px;
+      font-size: 16px;
+    }
 
-            .profile-pic {
-                width: 120px;
-                height: 120px;
-            }
-        }
-    </style>
+    .profile-pic {
+      width: 120px;
+      height: 120px;
+    }
+  }
+</style>
 </head>
 <body>
 
-<!-- Star Container (background) -->
+<!-- Star Container -->
 <div id="star-container"></div>
 
+<!-- Video Background -->
 <video id="whale" autoplay muted playsinline
        class="absolute top-0 left-0 w-full h-full object-cover z-10 opacity-30 pointer-events-none"
        style="
@@ -141,51 +159,55 @@
             transform-origin: center;
             filter: brightness(1.1) contrast(1.3) saturate(1.8) hue-rotate(15deg) blur(1px);
        ">
-    <source src="media/whale.webm" type="video/webm">
-    Your browser does not support the video tag.
+  <source src="media/whale.webm" type="video/webm" />
+  Your browser does not support the video tag.
 </video>
 
-<!-- Name + Picture -->
+<!-- Profile & Name -->
 <div class="flex flex-col sm:flex-row items-center space-y-4 sm:space-y-0 sm:space-x-8 mb-6 z-10">
-    <img src="media/fiona.jpg" alt="Fiona's Profile Picture" class="profile-pic" />
-    <h1 class="hero-name">Fiona Syed</h1>
+  <img src="media/fiona.jpg" alt="Fiona's Profile Picture" class="profile-pic" />
+  <h1 class="hero-name">Fiona Syed</h1>
 </div>
 
 <!-- Welcome Text -->
 <p class="text-xl text-pink-200 mb-10 italic z-10">Welcome to Fiona's Galaxy!</p>
 
-<!-- Button Links -->
+<!-- Buttons -->
 <div class="grid grid-cols-2 gap-6 max-[640px]:grid-cols-1 z-10">
-    <a href="https://www.linkedin.com/in/fiona-syed-124064144/" target="_blank" class="button-link">LinkedIn</a>
-    <a href="https://github.com" target="_blank" class="button-link">GitHub</a>
-    <a href="resume.html" class="button-link">Resume</a>
-    <a href="portfolio.html" class="button-link">Portfolio</a>
-    <a href="contact.html" class="button-link">Contact</a>
-    <a href="about.html" class="button-link">About Me</a>
+  <a href="https://www.linkedin.com/in/fiona-syed-124064144/" target="_blank" class="button-link">LinkedIn</a>
+  <a href="https://github.com" target="_blank" class="button-link">GitHub</a>
+  <a href="resume.html" class="button-link">Resume</a>
+  <a href="portfolio.html" class="button-link">Portfolio</a>
+  <a href="contact.html" class="button-link">Contact</a>
+  <a href="about.html" class="button-link">About Me</a>
 </div>
 
-<!-- Star Generator Script -->
+<!-- Stars script -->
 <script>
-    const starContainer = document.getElementById('star-container');
-    const numberOfStars = 150;
+  const starContainer = document.getElementById('star-container');
+  const numberOfStars = 100;
 
-    for (let i = 0; i < numberOfStars; i++) {
-        const star = document.createElement('div');
-        const isDiamond = Math.random() > 0.5;
+  for (let i = 0; i < numberOfStars; i++) {
+    const star = document.createElement('div');
+    const isDiamond = Math.random() > 0.5;
 
-        star.classList.add('star');
-        if (isDiamond) {
-            star.classList.add('diamond');
-        }
-
-        star.style.top = `${Math.random() * 100}vh`;
-        star.style.left = `${Math.random() * 100}vw`;
-        star.style.animationDuration = `${1.5 + Math.random() * 2}s, ${4 + Math.random() * 4}s`;
-        star.style.opacity = Math.random().toFixed(2);
-        starContainer.appendChild(star);
+    if (isDiamond) {
+      star.classList.add('diamond');
+    } else {
+      star.classList.add('star');
     }
+
+    star.style.top = `${Math.random() * 100}vh`;
+    star.style.left = `${Math.random() * 100}vw`;
+
+    // Vary animation duration to make twinkle & spin asynchronous
+    star.style.animationDuration = `${2 + Math.random() * 3}s, ${3 + Math.random() * 3}s`;
+
+    starContainer.appendChild(star);
+  }
 </script>
 
 </body>
 </html>
+
 

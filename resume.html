@@ -57,20 +57,21 @@
     .pdf-container {
       position: relative;
       z-index: 10;
-      width: 100%;
-      height: 100%;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      padding: 1rem;
+      width: 80vw;
+      height: 90vh;
+      margin: auto;
+      margin-top: 2rem;
+      box-shadow: 0 8px 24px rgba(0,0,0,0.7);
+      border-radius: 12px;
+      overflow: hidden;
+      background: white; /* so it looks like paper */
     }
 
     iframe {
-      width: 90%;
-      height: 95%;
+      width: 100%;
+      height: 100%;
       border: none;
-      box-shadow: 0 0 30px rgba(255, 255, 255, 0.15);
-      border-radius: 0.75rem;
+      display: block;
     }
   </style>
 </head>
@@ -81,7 +82,7 @@
 
 <!-- PDF Resume Display -->
 <div class="pdf-container">
-  <iframe src="media/fiona_resume.pdf"></iframe>
+  <iframe src="media/fiona_resume.pdf" title="Fiona Syed Resume"></iframe>
 </div>
 
 <!-- Stars Script -->
@@ -91,14 +92,15 @@
   for (let i = 0; i < numberOfStars; i++) {
     const star = document.createElement('div');
     star.className = Math.random() > 0.5 ? 'star' : 'diamond';
-    star.style.top = ${Math.random() * 100}vh;
-    star.style.left = ${Math.random() * 100}vw;
-    star.style.animationDuration = ${2 + Math.random() * 3}s, ${3 + Math.random() * 4}s;
+    star.style.top = `${Math.random() * 100}vh`;
+    star.style.left = `${Math.random() * 100}vw`;
+    star.style.animationDuration = `${2 + Math.random() * 3}s, ${3 + Math.random() * 4}s`;
     starContainer.appendChild(star);
   }
 </script>
 
 </body>
 </html>
+
 
 

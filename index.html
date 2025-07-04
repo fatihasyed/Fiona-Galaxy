@@ -13,7 +13,8 @@
     padding: 0;
     font-family: 'Arial', sans-serif;
     color: white;
-    overflow: hidden;
+    overflow-x: hidden;
+    scroll-behavior: smooth;
     background: radial-gradient(
       ellipse at bottom,
       #4c1d95 30%,
@@ -26,7 +27,6 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: center;
     text-align: center;
     position: relative;
     z-index: 1;
@@ -123,6 +123,8 @@
     text-align: center;
     color: white;
     box-shadow: 0 0 10px rgba(139, 92, 246, 0.5);
+    display: inline-block;
+    text-decoration: none;
   }
 
   .button-link:hover {
@@ -137,12 +139,61 @@
     .button-link {
       padding: 12px 24px;
       font-size: 16px;
+      width: 100%;
+      max-width: 300px;
+      margin: 0 auto;
     }
 
     .profile-pic {
       width: 120px;
       height: 120px;
     }
+  }
+
+  /* Hamburger Menu Icon */
+  #hamburger {
+    position: fixed;
+    top: 1rem;
+    right: 1rem;
+    width: 36px;
+    height: 30px;
+    cursor: pointer;
+    z-index: 50;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+  #hamburger span {
+    display: block;
+    height: 4px;
+    background: white;
+    border-radius: 2px;
+  }
+
+  /* Sliding Menu Panel */
+  #slide-menu {
+    position: fixed;
+    top: -100vh;
+    left: 0;
+    width: 100vw;
+    background: rgba(28, 24, 71, 0.95);
+    color: white;
+    text-align: center;
+    padding: 3rem 0;
+    font-size: 1.4rem;
+    transition: top 0.4s ease;
+    z-index: 40;
+  }
+
+  #slide-menu a {
+    display: block;
+    margin: 1rem 0;
+    color: white;
+    text-decoration: none;
+  }
+
+  #slide-menu a:hover {
+    text-decoration: underline;
   }
 </style>
 </head>
@@ -151,63 +202,111 @@
 <!-- Star Container -->
 <div id="star-container"></div>
 
-<!-- Video Background -->
-<video id="whale" autoplay muted playsinline
-       class="absolute top-0 left-0 w-full h-full object-cover z-10 opacity-30 pointer-events-none"
-       style="
-            transform: rotate(-15deg) scale(1.2);
-            transform-origin: center;
-            filter: brightness(1.1) contrast(1.3) saturate(1.8) hue-rotate(15deg) blur(1px);
-       ">
-  <source src="media/whale.webm" type="video/webm" />
-  Your browser does not support the video tag.
-</video>
-
-<!-- Profile & Name -->
-<div class="flex flex-col sm:flex-row items-center space-y-4 sm:space-y-0 sm:space-x-8 mb-6 z-10">
-  <img src="media/fiona.jpg" alt="Fiona's Profile Picture" class="profile-pic" />
-  <h1 class="hero-name">Fiona Syed</h1>
+<!-- Hamburger Menu Icon -->
+<div id="hamburger" aria-label="Toggle menu" role="button" tabindex="0">
+  <span></span>
+  <span></span>
+  <span></span>
 </div>
 
-<!-- Welcome Text -->
+<!-- Sliding Menu Panel -->
+<nav id="slide-menu" aria-hidden="true">
+  <a href="#home" class="menu-link">Homepage</a>
+  <a href="resume.html" class="menu-link">Resume</a>
+  <a href="https://www.linkedin.com/in/fiona-syed-124064144/" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+  <a href="#contact" class="menu-link">Contact</a>
+  <a href="#about" class="menu-link">About Me</a>
+</nav>
+
+<!-- Main content -->
+<section id="home" class="flex flex-col sm:flex-row items-center space-y-4 sm:space-y-0 sm:space-x-8 mb-6 z-10" style="margin-top:100px;">
+  <img src="media/fiona.jpg" alt="Fiona's Profile Picture" class="profile-pic" />
+  <h1 class="hero-name">Fiona Syed</h1>
+</section>
+
 <p class="text-xl text-pink-200 mb-10 italic z-10">Welcome to Fiona's Galaxy!</p>
 
 <!-- Buttons -->
-<div class="grid grid-cols-2 gap-6 max-[640px]:grid-cols-1 z-10">
-  <a href="https://www.linkedin.com/in/fiona-syed-124064144/" target="_blank" class="button-link">LinkedIn</a>
-  <a href="https://github.com" target="_blank" class="button-link">GitHub</a>
+<div class="grid grid-cols-2 gap-6 max-[640px]:grid-cols-1 z-10 mb-20">
+  <a href="#home" class="button-link">Homepage</a>
   <a href="resume.html" class="button-link">Resume</a>
-  <a href="portfolio.html" class="button-link">Portfolio</a>
-  <a href="contact.html" class="button-link">Contact</a>
-  <a href="about.html" class="button-link">About Me</a>
+  <a href="https://www.linkedin.com/in/fiona-syed-124064144/" target="_blank" class="button-link">LinkedIn</a>
+  <a href="#contact" class="button-link">Contact</a>
+  <a href="#about" class="button-link">About Me</a>
 </div>
 
-<!-- Stars script -->
+<!-- Dummy Contact Section -->
+<section id="contact" style="min-height:300px; margin-bottom:100px; color:white; z-index:10;">
+  <h2>Contact Me</h2>
+  <p>Email: fatihasyed2004@gmail.com</p>
+  <p>Phone: 469-363-5950</p>
+</section>
+
+<!-- Dummy About Section -->
+<section id="about" style="min-height:300px; margin-bottom:100px; color:white; z-index:10;">
+  <h2>About Me</h2>
+  <p>This is a little bit about me...</p>
+</section>
+
+<!-- Stars Script -->
 <script>
   const starContainer = document.getElementById('star-container');
   const numberOfStars = 100;
-
   for (let i = 0; i < numberOfStars; i++) {
     const star = document.createElement('div');
-    const isDiamond = Math.random() > 0.5;
-
-    if (isDiamond) {
-      star.classList.add('diamond');
-    } else {
-      star.classList.add('star');
-    }
-
+    star.className = Math.random() > 0.5 ? 'star' : 'diamond';
     star.style.top = `${Math.random() * 100}vh`;
     star.style.left = `${Math.random() * 100}vw`;
-
-    // Vary animation duration to make twinkle & spin asynchronous
-    star.style.animationDuration = `${2 + Math.random() * 3}s, ${3 + Math.random() * 3}s`;
-
+    star.style.animationDuration = `${2 + Math.random() * 3}s, ${3 + Math.random() * 4}s`;
     starContainer.appendChild(star);
   }
+
+  const hamburger = document.getElementById('hamburger');
+  const slideMenu = document.getElementById('slide-menu');
+  let menuOpen = false;
+
+  function toggleMenu() {
+    if (menuOpen) {
+      slideMenu.style.top = '-100vh';
+      slideMenu.setAttribute('aria-hidden', 'true');
+    } else {
+      slideMenu.style.top = '0';
+      slideMenu.setAttribute('aria-hidden', 'false');
+    }
+    menuOpen = !menuOpen;
+  }
+
+  hamburger.addEventListener('click', toggleMenu);
+
+  // Close menu on clicking menu link and scroll smoothly if internal link
+  document.querySelectorAll('#slide-menu a.menu-link').forEach(link => {
+    link.addEventListener('click', e => {
+      e.preventDefault();
+      const targetId = link.getAttribute('href');
+      const targetElement = document.querySelector(targetId);
+      if (targetElement) {
+        targetElement.scrollIntoView({behavior: 'smooth'});
+      }
+      toggleMenu();
+    });
+  });
+
+  // Close menu if clicking outside or pressing Escape
+  window.addEventListener('click', (e) => {
+    if (menuOpen && !slideMenu.contains(e.target) && e.target !== hamburger) {
+      toggleMenu();
+    }
+  });
+
+  window.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && menuOpen) {
+      toggleMenu();
+    }
+  });
 </script>
 
 </body>
 </html>
+
 
 

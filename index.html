@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8" />
 <title>Fiona's Website</title>
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<link rel="icon" type="image/png" href="favicon.png" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link rel="icon" href="favicon.png" type="image/png" />
 <script src="https://cdn.tailwindcss.com"></script>
 <style>
   html, body {
@@ -13,14 +13,14 @@
     padding: 0;
     font-family: 'Arial', sans-serif;
     color: white;
-    overflow-x: hidden;
-    scroll-behavior: smooth;
     background: radial-gradient(
       ellipse at bottom,
       #4c1d95 30%,
       #1e1b4b 55%,
       #0f001a 100%
     );
+    overflow-x: hidden;
+    scroll-behavior: smooth;
   }
 
   body {
@@ -41,51 +41,29 @@
     z-index: 0;
   }
 
-  /* Round stars */
-  .star {
+  /* Stars */
+  .star, .diamond {
     position: absolute;
     width: 8px;
     height: 8px;
     background: white;
-    border-radius: 50%;
     filter: drop-shadow(0 0 6px #fff);
+    opacity: 0.7;
     animation: twinkle 3s infinite ease-in-out, spin 6s linear infinite;
-    opacity: 0.7;
   }
-
-  /* Diamond stars */
   .diamond {
-    position: absolute;
-    width: 8px;
-    height: 8px;
-    background: white;
-    filter: drop-shadow(0 0 6px #fff);
-    transform-origin: center;
-    animation: twinkle 3s infinite ease-in-out, spin 4s linear infinite;
-    opacity: 0.7;
     transform: rotate(45deg);
+    animation-duration: 3s, 4s;
   }
 
   @keyframes twinkle {
-    0%, 100% {
-      opacity: 0.3;
-      transform: scale(1);
-      filter: drop-shadow(0 0 6px #fff);
-    }
-    50% {
-      opacity: 1;
-      transform: scale(1.5);
-      filter: drop-shadow(0 0 15px #fff);
-    }
+    0%, 100% { opacity: 0.3; transform: scale(1); }
+    50% { opacity: 1; transform: scale(1.5); filter: drop-shadow(0 0 15px #fff); }
   }
 
   @keyframes spin {
-    0% {
-      transform: rotate(0deg);
-    }
-    100% {
-      transform: rotate(360deg);
-    }
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
   }
 
   .profile-pic {
@@ -199,17 +177,17 @@
 </head>
 <body>
 
-<!-- Star Container -->
+<!-- Stars -->
 <div id="star-container"></div>
 
-<!-- Hamburger Menu Icon -->
+<!-- Hamburger Icon -->
 <div id="hamburger" aria-label="Toggle menu" role="button" tabindex="0">
   <span></span>
   <span></span>
   <span></span>
 </div>
 
-<!-- Sliding Menu Panel -->
+<!-- Sliding Menu -->
 <nav id="slide-menu" aria-hidden="true">
   <a href="#home" class="menu-link">Homepage</a>
   <a href="resume.html" class="menu-link">Resume</a>
@@ -218,7 +196,7 @@
   <a href="#about" class="menu-link">About Me</a>
 </nav>
 
-<!-- Main content -->
+<!-- Hero Section -->
 <section id="home" class="flex flex-col sm:flex-row items-center space-y-4 sm:space-y-0 sm:space-x-8 mb-6 z-10" style="margin-top:100px;">
   <img src="media/fiona.jpg" alt="Fiona's Profile Picture" class="profile-pic" />
   <h1 class="hero-name">Fiona Syed</h1>
@@ -235,21 +213,21 @@
   <a href="#about" class="button-link">About Me</a>
 </div>
 
-<!-- Dummy Contact Section -->
+<!-- Contact Section -->
 <section id="contact" style="min-height:300px; margin-bottom:100px; color:white; z-index:10;">
   <h2>Contact Me</h2>
   <p>Email: fatihasyed2004@gmail.com</p>
   <p>Phone: 469-363-5950</p>
 </section>
 
-<!-- Dummy About Section -->
+<!-- About Section -->
 <section id="about" style="min-height:300px; margin-bottom:100px; color:white; z-index:10;">
   <h2>About Me</h2>
   <p>This is a little bit about me...</p>
 </section>
 
-<!-- Stars Script -->
 <script>
+  // Stars script
   const starContainer = document.getElementById('star-container');
   const numberOfStars = 100;
   for (let i = 0; i < numberOfStars; i++) {
@@ -261,12 +239,13 @@
     starContainer.appendChild(star);
   }
 
+  // Hamburger toggle menu
   const hamburger = document.getElementById('hamburger');
   const slideMenu = document.getElementById('slide-menu');
   let menuOpen = false;
 
   function toggleMenu() {
-    if (menuOpen) {
+    if(menuOpen) {
       slideMenu.style.top = '-100vh';
       slideMenu.setAttribute('aria-hidden', 'true');
     } else {
@@ -278,13 +257,13 @@
 
   hamburger.addEventListener('click', toggleMenu);
 
-  // Close menu on clicking menu link and scroll smoothly if internal link
+  // Close menu on internal link click and smooth scroll
   document.querySelectorAll('#slide-menu a.menu-link').forEach(link => {
     link.addEventListener('click', e => {
       e.preventDefault();
       const targetId = link.getAttribute('href');
       const targetElement = document.querySelector(targetId);
-      if (targetElement) {
+      if(targetElement) {
         targetElement.scrollIntoView({behavior: 'smooth'});
       }
       toggleMenu();
@@ -293,13 +272,13 @@
 
   // Close menu if clicking outside or pressing Escape
   window.addEventListener('click', (e) => {
-    if (menuOpen && !slideMenu.contains(e.target) && e.target !== hamburger) {
+    if(menuOpen && !slideMenu.contains(e.target) && e.target !== hamburger) {
       toggleMenu();
     }
   });
 
   window.addEventListener('keydown', (e) => {
-    if (e.key === 'Escape' && menuOpen) {
+    if(e.key === 'Escape' && menuOpen) {
       toggleMenu();
     }
   });
@@ -307,6 +286,7 @@
 
 </body>
 </html>
+
 
 
 
